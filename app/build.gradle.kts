@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -72,21 +73,25 @@ dependencies {
     implementation ("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
 
-    // Glide Image
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation("com.github.bumptech.glide:compiler:4.16.0")
-
     // Lifecycle
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.2")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
-    // Oauth
-    implementation ("com.google.android.gms:play-services-auth:21.2.0")
+    // Google Auth
+    implementation("com.google.android.gms:play-services-auth:21.1.1")
+    implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
+    implementation ("androidx.credentials:credentials:1.2.2")
+    implementation ("androidx.credentials:credentials-play-services-auth:1.2.2")
+    implementation ("com.google.android.libraries.identity.googleid:googleid")
+
+    // Facebook Auth
     implementation ("com.facebook.android:facebook-login:11.3.0")
 
     // Navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
 }

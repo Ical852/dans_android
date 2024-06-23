@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "936490091052",
+    "project_id": "job-portals-4d261",
+    "storage_bucket": "job-portals-4d261.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936490091052:android:30868f330cf1be806a8789",
+        "android_client_info": {
+          "package_name": "com.example.dansjobportals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936490091052-sf2bd7ot4h57uiiesc1ve51nn7s49n10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqktURURd2gRPJVYOuicNF0gQJZTbG2i8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936490091052-sf2bd7ot4h57uiiesc1ve51nn7s49n10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
