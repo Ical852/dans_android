@@ -18,8 +18,6 @@ import com.google.android.gms.tasks.Task
 
 class SignInActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
-    private lateinit var gso: GoogleSignInOptions
-    private lateinit var gsc: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,39 +26,5 @@ class SignInActivity : AppCompatActivity() {
         var signInText = binding.googleBtn.getChildAt(0) as TextView;
         signInText.text = "Sign in with Google"
 
-        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail().build()
-        gsc = GoogleSignIn.getClient(this, gso)
-
-        binding.googleBtn.setOnClickListener {
-            signIn()
-        }
-    }
-
-    fun signIn() {
-        var signInIntent = gsc.signInIntent
-        startActivityForResult(signInIntent, 1000)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode === 1000) {
-            var task = GoogleSignIn.getSignedInAccountFromIntent(data)
-
-            try {
-                task.getResult(ApiException::class.java)
-                navigateToHome()
-                Toast.makeText(this, "Something not wrong", Toast.LENGTH_SHORT).show()
-
-            } catch (e: ApiException) {
-                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    fun navigateToHome() {
-        finish()
-        var intent = Intent(this@SignInActivity, MainActivity::class.java)
-        startActivity(intent)
     }
 }
