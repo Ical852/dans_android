@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "936490091052-v2uucdsvaqn40mi8s9j6crugnc07qqh4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dansjobportals",
+            "certificate_hash": "0dee5884ad5b5bdf17ef99b5bd00ac522152a824"
+          }
+        },
+        {
           "client_id": "936490091052-sf2bd7ot4h57uiiesc1ve51nn7s49n10.apps.googleusercontent.com",
           "client_type": 3
         }

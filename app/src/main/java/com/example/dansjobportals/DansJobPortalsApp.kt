@@ -2,7 +2,11 @@ package com.example.dansjobportals
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.dansjobportals.ui.auth.signIn.signInModule
 import com.example.dansjobportals.ui.home.tabs.homeModule
+import com.example.dansjobportals.ui.home.tabs.profileModule
+import com.example.dansjobportals.viewModels.auth.signInViewModel
+import com.example.dansjobportals.viewModels.home.profileViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,7 +24,12 @@ class DansJobPortalsApp: Application() {
             androidContext( this@DansJobPortalsApp )
             modules(
                 listOf(
-                    homeModule
+                    homeModule,
+                    profileModule,
+                    signInViewModel,
+                    signInModule,
+                    profileViewModel,
+                    profileModule,
                 )
             )
         }

@@ -6,15 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.dansjobportals.R
-import com.example.dansjobportals.databinding.FragmentHomeBinding
 import com.example.dansjobportals.databinding.FragmentProfileBinding
 import com.example.dansjobportals.ui.auth.signIn.SignInActivity
-import com.example.dansjobportals.ui.home.MainActivity
+import com.example.dansjobportals.viewModels.home.ProfileViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import org.koin.dsl.module
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 val profileModule = module {
     factory { ProfileFragment() }
@@ -22,40 +22,36 @@ val profileModule = module {
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var gso: GoogleSignInOptions
-    private lateinit var gsc: GoogleSignInClient
+    private val viewModel: ProfileViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(layoutInflater, container,  false)
-        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail().build()
-        gsc = GoogleSignIn.getClient(requireContext(), gso)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val receive = arguments?.getString("fullName")
-        receive?.let {
-            binding.username.text = it
-        }
-
         binding.signOutBtn.setOnClickListener {
-            signOut()
+            viewModel.signOut()
         }
+
+        viewModel.signOutEvent.observe(viewLifecycleOwner, Observer { isSignedOut ->
+            if (isSignedOut) {
+                val intent = Intent(activity, SignInActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+        })
+
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
+            if (user != null) {
+                binding.username.text = user.displayName
+            }
+        })
     }
 
-    fun signOut() {
-        gsc.signOut().addOnCompleteListener{
-            val activity = requireActivity() as MainActivity
-            activity.finish()
-            startActivity(Intent(requireContext(), SignInActivity::class.java))
-        }
-    }
 }

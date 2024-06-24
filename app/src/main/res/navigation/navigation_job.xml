@@ -10,9 +10,11 @@
         android:name="com.example.dansjobportals.ui.home.tabs.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.dansjobportals.ui.home.tabs.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
 </navigation>
