@@ -21,7 +21,7 @@ class HomeViewModel(val repository: JobRepository): ViewModel() {
     val fullTime by lazy { MutableLiveData<Boolean>(false) }
     val jobList by lazy { MutableLiveData<List<JobModel>>(arrayListOf()) }
     val showFilter by lazy { MutableLiveData<Boolean>(false) }
-    val filter by lazy { MutableLiveData<String>("") }
+    val maxPage by lazy { MutableLiveData<Boolean>(false) }
 
     init {
         fetch()
@@ -36,7 +36,7 @@ class HomeViewModel(val repository: JobRepository): ViewModel() {
                 )
                 var newData = response
 
-                if (type == "extend") {
+                if (type == "extend" && newData.isEmpty().not()) {
                     var setupList: ArrayList<JobModel> = ArrayList()
                     setupList.addAll(jobList.value!!)
                     setupList.addAll(response)
@@ -46,6 +46,9 @@ class HomeViewModel(val repository: JobRepository): ViewModel() {
                 jobList.value = newData
                 loading.value = false
             } catch (e: Exception) {
+                if (type == "extend") {
+                    maxPage.value = true
+                }
                 message.value = "Terjadi kesalahan " + e.message
                 loading.value = false
             }

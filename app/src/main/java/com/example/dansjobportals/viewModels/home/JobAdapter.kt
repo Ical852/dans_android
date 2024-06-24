@@ -23,7 +23,12 @@ class JobAdapter(
     )
 
     override fun onBindViewHolder(holder: JobAdapter.ViewHolder, position: Int) {
-        val job = jobs[position]
+        val job = jobs.getOrNull(position)
+
+        if (job == null) {
+            return
+        }
+
         holder.binding.jobTitle.text = job.title
         holder.binding.companyTitle.text = job.company
         holder.binding.cityTitle.text = job.location

@@ -4,10 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-data class JobsResponseModel(
-    var jobs: List<JobModel>
-)
-
 @Entity(tableName = "tableJob")
 data class JobModel (
     @PrimaryKey(autoGenerate = false)

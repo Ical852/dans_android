@@ -23,7 +23,6 @@ val signInViewModel = module {
 class SignInViewModel(application: Application): AndroidViewModel(application) {
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var googleSignInClient: GoogleSignInClient
-    private val reqCode:Int=123
     private val context = getApplication<Application>().applicationContext
 
     val signInResult = MutableLiveData<Boolean>()
