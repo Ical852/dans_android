@@ -33,6 +33,10 @@ class SignInActivity : AppCompatActivity() {
             startActivityForResult(signIntent, reqCode)
         }
 
+        binding.facebookBtn.setOnClickListener {
+            Toast.makeText(this@SignInActivity, "Service not Available", Toast.LENGTH_SHORT).show()
+        }
+
         viewModel.signInResult.observe(this, Observer { isSignedIn ->
             if (isSignedIn) {
                 startActivity(Intent(this, MainActivity::class.java))

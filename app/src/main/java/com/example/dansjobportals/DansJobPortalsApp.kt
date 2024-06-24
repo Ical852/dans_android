@@ -2,10 +2,13 @@ package com.example.dansjobportals
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.dansjobportals.services.jobs.jobRepository
+import com.example.dansjobportals.services.jobs.networkModule
 import com.example.dansjobportals.ui.auth.signIn.signInModule
 import com.example.dansjobportals.ui.home.tabs.homeModule
 import com.example.dansjobportals.ui.home.tabs.profileModule
 import com.example.dansjobportals.viewModels.auth.signInViewModel
+import com.example.dansjobportals.viewModels.home.homeViewModel
 import com.example.dansjobportals.viewModels.home.profileViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -30,6 +33,9 @@ class DansJobPortalsApp: Application() {
                     signInModule,
                     profileViewModel,
                     profileModule,
+                    networkModule,
+                    jobRepository,
+                    homeViewModel
                 )
             )
         }

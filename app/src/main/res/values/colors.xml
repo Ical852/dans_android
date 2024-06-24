@@ -10,4 +10,6 @@
     <color name="calm">#0394F4</color>
     <color name="calm2">#2999D6</color>
     <color name="fb">#4469B2</color>
+    <color name="graybg">#C1BEBE</color>
+    <color name="gray">#4E4E4E</color>
 </resources>

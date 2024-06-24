@@ -43,6 +43,7 @@ android {
     // View Binding & Build Config
     buildFeatures {
         viewBinding = true
+        dataBinding = true
         buildConfig = true
     }
 }
