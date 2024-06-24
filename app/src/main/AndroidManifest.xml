@@ -23,6 +23,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.home.MainActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="false" />
         <activity
             android:name=".ui.splash.SplashActivity"

@@ -21,6 +21,7 @@ class HomeViewModel(val repository: JobRepository): ViewModel() {
     val fullTime by lazy { MutableLiveData<Boolean>(false) }
     val jobList by lazy { MutableLiveData<List<JobModel>>(arrayListOf()) }
     val showFilter by lazy { MutableLiveData<Boolean>(false) }
+    val filter by lazy { MutableLiveData<String>("") }
 
     init {
         fetch()

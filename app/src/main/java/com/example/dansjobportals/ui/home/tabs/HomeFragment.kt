@@ -2,10 +2,14 @@ package com.example.dansjobportals.ui.home.tabs
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.Visibility
@@ -37,8 +41,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadingInit()
         jobListInit()
         jobFilterInit()
+    }
+
+    private fun loadingInit() {
+        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) {
+                binding.rvJobList.visibility = View.GONE
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.rvJobList.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
+        })
     }
 
     private fun jobFilterInit() {
@@ -55,6 +72,44 @@ class HomeFragment : Fragment() {
                 binding.toggleFilter.setImageResource(R.drawable.ic_arrow_down)
             }
         })
+
+        binding.fulltimeToggle.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.fullTime.postValue(isChecked)
+        }
+
+        binding.etLocation.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.location.postValue(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+
+        binding.etSearch.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.description.postValue(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+
+        binding.etSearch.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                viewModel.fetch()
+                true
+            } else {
+                false
+            }
+        }
+
+        binding.btnFilter.setOnClickListener {
+            viewModel.fetch()
+            viewModel.showFilter.postValue(false)
+        }
     }
 
     private val jobListAdapter by lazy {
