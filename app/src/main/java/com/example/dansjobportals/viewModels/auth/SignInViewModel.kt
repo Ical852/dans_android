@@ -12,12 +12,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val signInViewModel = module {
-    viewModel { SignInViewModel(get()) }
+    viewModel { SignInViewModel(get())}
 }
 
 class SignInViewModel(application: Application): AndroidViewModel(application) {
